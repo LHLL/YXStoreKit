@@ -9,23 +9,51 @@
 import UIKit
 import StoreKit
 
+enum YXFakeRequestMode{
+    // Request will instantly finish after [start] call.
+    case normal
+    // Request will not instantly finish after [start] call.
+    // Uses this mode for testing [cancel].
+    case idle
+    // Request will not instantly finish after [start] call.
+    // use this mode for duplicate requests.
+    case delayed
+}
+
 class FakeSKProductsRequest: SKProductsRequest {
     
-    private let productsIds: Set<String>
-    private let invalidIds: [String]
+    private var productsIds: Set<String> = []
+    private var invalidIds: [String] = []
+    private var mode:YXFakeRequestMode = .normal
     
-    init(productIdentifiers: Set<String>, invalidIdentifiers:[String]) {
-        productsIds = productIdentifiers
-        invalidIds = invalidIdentifiers
+    convenience init(productIdentifiers: Set<String>, invalidIdentifiers:[String], requestMode:YXFakeRequestMode) {
+        self.init(productIdentifiers: productIdentifiers)
+        self.productsIds = productIdentifiers
+        self.invalidIds = invalidIdentifiers
+        self.mode = requestMode
+    }
+    
+    override
+    private init(productIdentifiers: Set<String>) {
         super.init(productIdentifiers: productIdentifiers)
+    }
+    
+    override init() {
+        super.init()
     }
     
     override
     func start() {
-        let response = FakeSKProductsResponse(productIdentifiers: productsIds,
-                                              invalidIdentifiers: invalidIds)
-        delegate?.productsRequest(self, didReceive: response)
-        delegate?.requestDidFinish?(self)
+        switch mode {
+        case .normal:
+            sendRequest()
+        case .delayed:
+            DispatchQueue.global().asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 1)) {
+                self.sendRequest()
+            }
+        case .idle:
+            return
+        }
     }
     
     override
@@ -35,4 +63,14 @@ class FakeSKProductsRequest: SKProductsRequest {
         delegate?.request?(self, didFailWithError: error)
     }
     
+}
+
+//MARK: Private Methods
+extension FakeSKProductsRequest {
+    private func sendRequest(){
+        let response = FakeSKProductsResponse(productIdentifiers: productsIds,
+                                              invalidIdentifiers: invalidIds)
+        delegate?.productsRequest(self, didReceive: response)
+        delegate?.requestDidFinish?(self)
+    }
 }

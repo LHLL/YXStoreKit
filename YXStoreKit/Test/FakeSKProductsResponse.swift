@@ -26,8 +26,10 @@ class FakeSKProductsResponse: SKProductsResponse {
     
     init(productIdentifiers: Set<String>, invalidIdentifiers:[String]){
         invalidIds = invalidIdentifiers
+        let ids = productIdentifiers.filter({!invalidIdentifiers.contains($0)})
         var prods = [SKProduct]()
-        for id in productIdentifiers {
+        for id in ids {
+            
             prods.append(FakeSKProduct(productId: id))
         }
         skProducts = prods

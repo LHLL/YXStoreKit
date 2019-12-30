@@ -25,6 +25,8 @@ struct YXDictionary<Key:Hashable, Value:Any> {
 }
 
 extension YXDictionary where Value:Equatable {
+    
+    /** Dumps all values in the dictionary that equal to the passed-in value. */
     mutating func dump(value:Value) {
         readWriteQueue.sync{
             for key in self.dict.keys {

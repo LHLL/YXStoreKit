@@ -9,17 +9,37 @@
 import XCTest
 
 class YXProductServiceTest: XCTestCase {
+    
+    private let invalidIds = [
+        "com.yx.invalid1",
+        "com.yx.invalid2",
+    ]
+    private let productIds:Set<String> = [
+        "com.yx.valid1",
+        "com.yx.valid2",
+        "com.yx.invalid1",
+        "com.yx.invalid2",
+    ]
+    private let expectedProductsIds:[String] = [
+        "com.yx.valid1",
+        "com.yx.valid2",
+    ]
+    private let expectedErrorDomain = "com.yxstorekit.products"
+    private let expectedErrorMessage = "User cancelled the request."
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testFetchProducts(){
+        let exp = expectation(description: "fetch products")
+        let builder = FakeYXProductRequestBuilder(invalidIdentifiers: invalidIds,
+                                                  requestMode: .normal)
+        let service = YXProductService(builder: builder)
+        service.fetchProducts(productIds: productIds, callbackQueue: .main) { [weak self] (products, invalids, error) in
+            exp.fulfill()
+            XCTAssertNil(error)
+            XCTAssertEqual(invalids, self?.invalidIds)
+            XCTAssertEqual(products.map({$0.productIdentifier}), self?.expectedProductsIds)
+        }
+        waitForExpectations(timeout: 0.25, handler: nil)
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testFetch() {
-        
-    }
+    
 
 }
