@@ -48,7 +48,7 @@ class FakeSKProductsRequest: SKProductsRequest {
         case .normal:
             sendRequest()
         case .delayed:
-            DispatchQueue.global().asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 1)) {
+            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
                 self.sendRequest()
             }
         case .idle:
