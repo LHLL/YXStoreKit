@@ -86,7 +86,7 @@ extension YXProductServiceImpl:SKProductsRequestDelegate {
         let err = YXError(domain: .products, type: .normal(reason: error.localizedDescription))
         for i in 0..<callbackQueues.count {
             callbackQueues[i].async {
-                callbackCompletions[i](/*products= */ [], /*invalids= */[], err)
+                callbackCompletions[i](/*products= */[], /*invalids= */[], err)
             }
         }
     }

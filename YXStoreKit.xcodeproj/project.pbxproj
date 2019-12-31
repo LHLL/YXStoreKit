@@ -34,6 +34,13 @@
 		697364EE23BBCA9E006C9332 /* YXProductServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364EC23BBCA4F006C9332 /* YXProductServiceImpl.swift */; };
 		697364EF23BBCE3D006C9332 /* YXReceiptManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364E823BACFE2006C9332 /* YXReceiptManagerImpl.swift */; };
 		697364F123BBCF5A006C9332 /* YXReceiptManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364F023BBCF5A006C9332 /* YXReceiptManagerTest.swift */; };
+		697364F623BBEA7E006C9332 /* YXUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364F523BBEA7E006C9332 /* YXUser.swift */; };
+		697364F723BBEA7E006C9332 /* YXUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364F523BBEA7E006C9332 /* YXUser.swift */; };
+		697364F923BBEDB3006C9332 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364F823BBEDB3006C9332 /* UserManager.swift */; };
+		697364FA23BBEDB3006C9332 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364F823BBEDB3006C9332 /* UserManager.swift */; };
+		697364FC23BBFD23006C9332 /* YXLocalUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364FB23BBFD23006C9332 /* YXLocalUserManager.swift */; };
+		697364FD23BBFD23006C9332 /* YXLocalUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364FB23BBFD23006C9332 /* YXLocalUserManager.swift */; };
+		697364FF23BC057A006C9332 /* YXLocalUserManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364FE23BC057A006C9332 /* YXLocalUserManagerTest.swift */; };
 		699CCFA423B8944000B5C2FE /* FakeSKProductsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CCFA323B8944000B5C2FE /* FakeSKProductsRequest.swift */; };
 		699CCFA623B8958600B5C2FE /* FakeSKProductsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CCFA523B8958600B5C2FE /* FakeSKProductsResponse.swift */; };
 		699CCFA823B895E700B5C2FE /* FakeSKProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CCFA723B895E700B5C2FE /* FakeSKProduct.swift */; };
@@ -80,6 +87,10 @@
 		697364E823BACFE2006C9332 /* YXReceiptManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXReceiptManagerImpl.swift; sourceTree = "<group>"; };
 		697364EC23BBCA4F006C9332 /* YXProductServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXProductServiceImpl.swift; sourceTree = "<group>"; };
 		697364F023BBCF5A006C9332 /* YXReceiptManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXReceiptManagerTest.swift; sourceTree = "<group>"; };
+		697364F523BBEA7E006C9332 /* YXUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXUser.swift; sourceTree = "<group>"; };
+		697364F823BBEDB3006C9332 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		697364FB23BBFD23006C9332 /* YXLocalUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXLocalUserManager.swift; sourceTree = "<group>"; };
+		697364FE23BC057A006C9332 /* YXLocalUserManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXLocalUserManagerTest.swift; sourceTree = "<group>"; };
 		699CCFA323B8944000B5C2FE /* FakeSKProductsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSKProductsRequest.swift; sourceTree = "<group>"; };
 		699CCFA523B8958600B5C2FE /* FakeSKProductsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSKProductsResponse.swift; sourceTree = "<group>"; };
 		699CCFA723B895E700B5C2FE /* FakeSKProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSKProduct.swift; sourceTree = "<group>"; };
@@ -150,6 +161,7 @@
 				699CCFB623B9D1EB00B5C2FE /* YXProductServiceTest.swift */,
 				697364E323BACBE2006C9332 /* FakeYXReceiptValidatorTest.swift */,
 				697364F023BBCF5A006C9332 /* YXReceiptManagerTest.swift */,
+				697364FE23BC057A006C9332 /* YXLocalUserManagerTest.swift */,
 			);
 			path = YXStoreKitTests;
 			sourceTree = "<group>";
@@ -164,6 +176,7 @@
 				699CCFAF23B9CE2000B5C2FE /* ProductRequestBuilder.swift */,
 				697364DE23BAC85D006C9332 /* ReceiptValidator.swift */,
 				697364E523BACE17006C9332 /* ReceiptManager.swift */,
+				697364F823BBEDB3006C9332 /* UserManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -175,6 +188,7 @@
 				699CCFB423B9D01000B5C2FE /* YXProductRequestBuilderImp.swift */,
 				697364EC23BBCA4F006C9332 /* YXProductServiceImpl.swift */,
 				697364E823BACFE2006C9332 /* YXReceiptManagerImpl.swift */,
+				697364FB23BBFD23006C9332 /* YXLocalUserManager.swift */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -183,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				691C5ABF23B0A3D900AFA52C /* YXDictionary.swift */,
+				697364F523BBEA7E006C9332 /* YXUser.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -312,12 +327,15 @@
 			files = (
 				691C5AC023B0A3D900AFA52C /* YXDictionary.swift in Sources */,
 				691C5AAF23B0959100AFA52C /* SKProduct+Purchasable.swift in Sources */,
+				697364F923BBEDB3006C9332 /* UserManager.swift in Sources */,
 				699CCFB023B9CE2000B5C2FE /* ProductRequestBuilder.swift in Sources */,
 				691C5ABB23B09E5B00AFA52C /* Requests.swift in Sources */,
 				697364DF23BAC85D006C9332 /* ReceiptValidator.swift in Sources */,
 				691C5AAB23B0931500AFA52C /* Purchasable.swift in Sources */,
 				691C5ABD23B0A1ED00AFA52C /* Error.swift in Sources */,
 				699CCFB523B9D01000B5C2FE /* YXProductRequestBuilderImp.swift in Sources */,
+				697364F623BBEA7E006C9332 /* YXUser.swift in Sources */,
+				697364FC23BBFD23006C9332 /* YXLocalUserManager.swift in Sources */,
 				697364E923BACFE2006C9332 /* YXReceiptManagerImpl.swift in Sources */,
 				697364E623BACE17006C9332 /* ReceiptManager.swift in Sources */,
 				697364ED23BBCA4F006C9332 /* YXProductServiceImpl.swift in Sources */,
@@ -336,6 +354,7 @@
 				699CCFA923B898E400B5C2FE /* Error.swift in Sources */,
 				697364DD23B9E00C006C9332 /* YXSKProductsRequestTest.swift in Sources */,
 				691C5AB123B0987B00AFA52C /* SKProduct+PurchasableTest.swift in Sources */,
+				697364FD23BBFD23006C9332 /* YXLocalUserManager.swift in Sources */,
 				691C5AC323B0A79000AFA52C /* YXDictionaryTest.swift in Sources */,
 				697364E123BACA5F006C9332 /* FakeYXReceiptValidator.swift in Sources */,
 				697364EE23BBCA9E006C9332 /* YXProductServiceImpl.swift in Sources */,
@@ -345,13 +364,16 @@
 				699CCFB323B9CF5600B5C2FE /* ProductRequestBuilder.swift in Sources */,
 				699CCFAC23B899BB00B5C2FE /* ProductService.swift in Sources */,
 				699CCFB223B9CEF100B5C2FE /* FakeYXProductRequestBuilder.swift in Sources */,
+				697364FF23BC057A006C9332 /* YXLocalUserManagerTest.swift in Sources */,
 				699CCFB723B9D1EB00B5C2FE /* YXProductServiceTest.swift in Sources */,
 				697364E223BACA6A006C9332 /* ReceiptValidator.swift in Sources */,
+				697364FA23BBEDB3006C9332 /* UserManager.swift in Sources */,
 				691C5AB323B0996000AFA52C /* SKProduct+Purchasable.swift in Sources */,
 				699CCFA623B8958600B5C2FE /* FakeSKProductsResponse.swift in Sources */,
 				691C5AB223B0995300AFA52C /* Purchasable.swift in Sources */,
 				697364E723BACEB5006C9332 /* ReceiptManager.swift in Sources */,
 				691C5AB523B099F100AFA52C /* FakeSKProductSubscriptionPeriod.swift in Sources */,
+				697364F723BBEA7E006C9332 /* YXUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
