@@ -27,7 +27,7 @@ public final class YXProductService:NSObject {
     }
     
     /**
-     * Fetches purchasable products .
+     * Fetches purchasable products.
      *
      * @param productIds A set of strings that each of them stands uniquely for a product.
      * @param callbackQueue A queue that completion closure will be called in. Default is main queue.

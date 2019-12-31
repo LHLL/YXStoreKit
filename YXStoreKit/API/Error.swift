@@ -8,11 +8,12 @@
 
 import Foundation
 
-public enum YXErrorType {
+public enum YXErrorType:Equatable {
     case unknown
     case duplicateRequests
     case unexpectedRequests
     case userCancelled
+    case receipt
     case normal(reason:String)
 }
 
@@ -27,13 +28,15 @@ extension YXErrorType {
             return "There is an unexpected requests found."
         case .userCancelled:
             return "User cancelled the request."
+        case .receipt:
+            return "Cannot validate the App Store receipt."
         case .normal(let reason):
             return reason
         }
     }
 }
 
-public enum YXErrorDomain {
+public enum YXErrorDomain:Equatable {
     case unknown
     case products
     case transaction
