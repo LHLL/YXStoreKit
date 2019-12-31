@@ -7,25 +7,19 @@
 //
 
 import Foundation
-import StoreKit
 
-typealias YXProductCompletion = (([YXProduct], [String], YXError?)->Void)
+/**
+ * Closure that provides callback for [fetchProducts] method defined in the [YXProductService].
+ *
+ * Needs to be used as @escaping.
+ */
+public typealias YXProductCompletion = ((
+    /*valid products=*/ [YXProduct],
+    /*Invalid product identifiers= */ [String],
+    /*Error=*/ YXError?
+    )->Void)
 
-public final class YXProductService:NSObject {
-    private var queues:YXDictionary<SKRequest, [DispatchQueue]> = YXDictionary()
-    private var completions:YXDictionary<SKRequest, [YXProductCompletion]> = YXDictionary()
-    private var requests:YXDictionary<Set<String>, SKRequest> = YXDictionary()
-    private let requestBuilder:YXProductRequestBuilder
-    
-    public init(builder:YXProductRequestBuilder) {
-        requestBuilder = builder
-    }
-    
-    @available(*, unavailable)
-    override init() {
-        fatalError("init() has not been implemented")
-    }
-    
+public protocol YXProductService:AnyObject {
     /**
      * Fetches purchasable products.
      *
@@ -33,62 +27,7 @@ public final class YXProductService:NSObject {
      * @param callbackQueue A queue that completion closure will be called in. Default is main queue.
      * @param completion A closure to be invoked when the call is finished.
      */
-    func fetchProducts(productIds:Set<String>, callbackQueue:DispatchQueue = .main, completion: @escaping YXProductCompletion) {
-        guard let request = requests[productIds] else{
-            let request = requestBuilder.build(productIdentifiers: productIds)
-            request.delegate = self
-            requests[productIds] = request
-            queues[request] = [callbackQueue]
-            completions[request] = [completion]
-            request.start()
-            return
-        }
-        var callbackQueues = queues[request]
-        callbackQueues?.append(callbackQueue)
-        queues[request] = callbackQueues
-        
-        var callbackCompletions = completions[request]
-        callbackCompletions?.append(completion)
-        completions[request] = callbackCompletions
-    }
-}
-
-//MARK: SKProductsRequestDelegate
-extension YXProductService:SKProductsRequestDelegate {
-    public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        guard let callbackQueues = queues[request], let callbackCompletions = completions[request] else {
-            return
-        }
-        queues[request] = nil
-        completions[request] = nil
-        requests.dump(value: request)
-        guard callbackCompletions.count == callbackCompletions.count else {
-            assert(false, "Count of callback queues and callback compeltions doesn't match.")
-            return
-        }
-        for i in 0..<callbackQueues.count {
-            callbackQueues[i].async {
-                callbackCompletions[i](response.products, response.invalidProductIdentifiers, /* error= */ nil)
-            }
-        }
-    }
-    
-    public func request(_ request: SKRequest, didFailWithError error: Error) {
-        guard let callbackQueues = queues[request], let callbackCompletions = completions[request] else {
-            return
-        }
-        queues[request] = nil
-        completions[request] = nil
-        requests.dump(value: request)
-        guard callbackCompletions.count == callbackCompletions.count else {
-            assert(false, "Count of callback queues and callback compeltions doesn't match.")
-            return
-        }
-        let err = YXError(domain: .products, type: .normal(reason: error.localizedDescription))
-        for i in 0..<callbackQueues.count {
-            callbackQueues[i].async {
-                callbackCompletions[i](/*products= */ [], /*invalids= */[], err)
-            }
-        }
-    }
+    func fetchProducts(productIds:Set<String>,
+                       callbackQueue:DispatchQueue,
+                       completion: @escaping YXProductCompletion)
 }

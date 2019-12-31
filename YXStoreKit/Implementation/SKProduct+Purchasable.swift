@@ -9,7 +9,7 @@
 import StoreKit
 
 extension YXSubscriptionPeriod {
-    init(_ period:SKProductSubscriptionPeriod) {
+    public init(_ period:SKProductSubscriptionPeriod) {
         self = YXSubscriptionPeriod.allCases[Int(period.unit.rawValue)]
     }
 }

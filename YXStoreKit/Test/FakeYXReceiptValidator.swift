@@ -8,30 +8,17 @@
 
 import Foundation
 
-enum ReceiptValidatorMode{
-    // Simulates a successful validation.
-    case succeed
-    // Simulates a failed validation.
-    case error
-}
-
 struct FakeYXReceiptValidator:YXReceiptValidator {
     
-    private let mode:ReceiptValidatorMode
+    private let data:Data
     
-    init(validatorMode:ReceiptValidatorMode) {
-        mode = validatorMode
+    init(expectedData:Data) {
+        data = expectedData
     }
     
     func validate(receipt:Data, callbackQueue:DispatchQueue, completion: @escaping ((Error?)->Void)) {
-        if mode == .succeed {
-            callbackQueue.async {
-                completion(nil)
-            }
-            return
-        }
         callbackQueue.async {
-            completion(YXError(domain: .receiptValidation, type: .receipt))
+            completion(self.data == receipt ? nil:YXError(domain: .receipt, type: .receiptValidationFailed))
         }
     }
 }

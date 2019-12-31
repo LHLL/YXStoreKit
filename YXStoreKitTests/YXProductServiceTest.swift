@@ -33,7 +33,7 @@ class YXProductServiceTest: XCTestCase {
         let exp = expectation(description: "fetch products")
         let builder = FakeYXProductRequestBuilder(invalidIdentifiers: invalidIds,
                                                   requestMode: .normal)
-        let service = YXProductService(builder: builder)
+        let service = YXProductServiceImpl(builder: builder)
         service.fetchProducts(productIds: productIds, callbackQueue: .main) { [weak self] (products, invalids, error) in
             exp.fulfill()
             XCTAssertNil(error)
@@ -47,7 +47,7 @@ class YXProductServiceTest: XCTestCase {
         let exp = expectation(description: "duplicate requests")
         let builder = FakeYXProductRequestBuilder(invalidIdentifiers: invalidIds,
                                                   requestMode: .delayed)
-        let service = YXProductService(builder: builder)
+        let service = YXProductServiceImpl(builder: builder)
         var callbackCount = 0
         service.fetchProducts(productIds: productIds, callbackQueue: .main) { [weak self] (products, invalids, error) in
             if callbackCount == 1 {
@@ -67,7 +67,7 @@ class YXProductServiceTest: XCTestCase {
             }
             XCTAssertNil(error)
             XCTAssertEqual(invalids, self?.invalidIds)
-            XCTAssertEqual(products.map({$0.productIdentifier}), self?.expectedProductsIds)
+            XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
         }
         waitForExpectations(timeout: 1.25, handler: nil)
     }
@@ -76,7 +76,7 @@ class YXProductServiceTest: XCTestCase {
         let exp = expectation(description: "multiple requests")
         let builder = FakeYXProductRequestBuilder(invalidIdentifiers: invalidIds,
                                                   requestMode: .delayed)
-        let service = YXProductService(builder: builder)
+        let service = YXProductServiceImpl(builder: builder)
         var callbackCount = 0
         service.fetchProducts(productIds: productIds, callbackQueue: .main) { [weak self] (products, invalids, error) in
             if callbackCount == 1 {

@@ -9,10 +9,11 @@
 import XCTest
 
 class FakeYXReceiptValidatorTest: XCTestCase {
+    private let expectedData = "test".data(using: .utf8)
     
     func testSuccess() {
         let exp = expectation(description: "test a successful validation")
-        FakeYXReceiptValidator(validatorMode: .succeed).validate(receipt: Data(),
+        FakeYXReceiptValidator(expectedData: expectedData!).validate(receipt: expectedData!,
                                                                  callbackQueue: .main)
         { (error) in
             XCTAssertNil(error)
@@ -23,13 +24,13 @@ class FakeYXReceiptValidatorTest: XCTestCase {
     
     func testFailure() {
         let exp = expectation(description: "test a successful validation")
-        FakeYXReceiptValidator(validatorMode: .error).validate(receipt: Data(),
+        FakeYXReceiptValidator(expectedData: expectedData!).validate(receipt: Data(),
                                                                  callbackQueue: .main)
         { (error) in
             XCTAssertNotNil(error)
             XCTAssert(error is YXError)
-            XCTAssertEqual((error as? YXError)?.domain, YXErrorDomain.receiptValidation)
-            XCTAssertEqual((error as? YXError)?.type, YXErrorType.receipt)
+            XCTAssertEqual((error as? YXError)?.domain, YXErrorDomain.receipt)
+            XCTAssertEqual((error as? YXError)?.type, YXErrorType.receiptValidationFailed)
             exp.fulfill()
         }
         waitForExpectations(timeout: 0.25, handler: nil)
