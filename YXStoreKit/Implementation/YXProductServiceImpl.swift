@@ -9,10 +9,18 @@
 import Foundation
 import StoreKit
 
-public final class YXProductServiceImpl:NSObject {
+/** The concrete implementation of the [YXProductService] */
+public final class YXProductServiceImpl: NSObject, YXProductService {
+    /** A thread-safe dictionary that stores all callback queues. */
     private var queues:YXDictionary<SKRequest, [DispatchQueue]> = YXDictionary()
+    
+    /** A thread-safe dictionary that stores all callback closures. */
     private var completions:YXDictionary<SKRequest, [YXProductCompletion]> = YXDictionary()
+    
+    /** A thread-safe dictionary that stores all pending requests. */
     private var requests:YXDictionary<Set<String>, SKRequest> = YXDictionary()
+    
+    /** A builder that builds a [SKProductsRequest] upon demand. */
     private let requestBuilder:YXProductRequestBuilder
     
     public init(builder:YXProductRequestBuilder) {
@@ -24,7 +32,7 @@ public final class YXProductServiceImpl:NSObject {
         fatalError("init() has not been implemented")
     }
     
-    func fetchProducts(productIds:Set<String>, callbackQueue:DispatchQueue = .main, completion: @escaping YXProductCompletion) {
+    public func fetchProducts(productIds:Set<String>, callbackQueue:DispatchQueue, completion: @escaping YXProductCompletion) {
         guard let request = requests[productIds] else{
             let request = requestBuilder.build(productIdentifiers: productIds)
             request.delegate = self

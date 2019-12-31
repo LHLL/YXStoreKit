@@ -58,6 +58,18 @@ class YXReceiptManagerTest: XCTestCase {
         }
         waitForExpectations(timeout: 0.25, handler: nil)
     }
+    
+    func testReceiptMissingReceiptUrl(){
+        let exp = expectation(description: "Missing local receipt url is handled.")
+        let validator = FakeYXReceiptValidator(expectedData: Data())
+        let manager = YXReceiptManagerImpl(receiptValidator:validator, receiptUrl:nil)
+        manager.validateReceipt(callbackQueue: .main) { (error) in
+            XCTAssertEqual((error as? YXError)?.domain, YXErrorDomain.receipt)
+            XCTAssertEqual((error as? YXError)?.type, YXErrorType.receiptMissing)
+            exp.fulfill()
+        }
+        waitForExpectations(timeout: 0.25, handler: nil)
+    }
 
 }
 

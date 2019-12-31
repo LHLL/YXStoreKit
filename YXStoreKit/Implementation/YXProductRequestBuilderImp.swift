@@ -9,6 +9,7 @@
 import Foundation
 import StoreKit
 
+/** The concrete implementation of the [YXProductRequestBuilder]. */
 public struct YXProductRequestBuilderImpl:YXProductRequestBuilder {
     public func build(productIdentifiers:Set<String>)->SKProductsRequest {
         return SKProductsRequest(productIdentifiers: productIdentifiers)

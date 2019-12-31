@@ -14,6 +14,7 @@ extension YXSubscriptionPeriod {
     }
 }
 
+/** Makes sure that [SKProduct] adopts YXProduct protocol. */
 extension SKProduct:YXProduct {
     public var subscriptionUnit: YXSubscriptionPeriod? {
         if let unit = self.subscriptionPeriod {

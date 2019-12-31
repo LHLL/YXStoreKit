@@ -8,6 +8,7 @@
 
 import Foundation
 
+/** The concrete implementation of the YXReceiptManager. */
 public struct YXReceiptManagerImpl:YXReceiptManager {
     private var validator: YXReceiptValidator
     
