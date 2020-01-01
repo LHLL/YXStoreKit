@@ -32,4 +32,11 @@ public struct YXUser:Equatable {
      */
     let existingTransactions:[String]
     
+    /**
+     * A list of products that are available for the user to purchase.
+     *
+     * Idearly, this value should be stored on the server side and fetched as soon as app launches.
+     */
+    let productIdentifiers:Set<String>
+    
 }

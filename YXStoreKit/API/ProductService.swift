@@ -14,9 +14,9 @@ import Foundation
  * Needs to be used as @escaping.
  */
 public typealias YXProductCompletion = ((
-    /*valid products=*/ [YXProduct],
-    /*Invalid product identifiers= */ [String],
-    /*Error=*/ YXError?
+    _ products:[YXProduct],
+    _ invalidIds:[String],
+    _ error:YXError?
     )->Void)
 
 public protocol YXProductService:AnyObject {

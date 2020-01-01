@@ -22,19 +22,22 @@ import Foundation
 public struct YXLocalUserManager:YXUserManager {
     /** A string that uniquely identifies the user. */
     private let userId:String
+    private let productIds:Set<String>
     private let userDefaults = UserDefaults.standard
     private let existingTransactionKey = "com.yx.existingTransactions"
     private let pendingTransactionKey = "com.yx.pendingTransactions"
     
-    public init(userIdentifier:String) {
+    public init(userIdentifier:String, productIdentifiers:Set<String>) {
         userId = userIdentifier
+        productIds = productIdentifiers
     }
     
     public func user(callbackQueue: DispatchQueue, completion: @escaping YXUserCompletion) {
         guard let userDict = userDefaults.dictionary(forKey: userId) else{
             let user = YXUser(identifier: userId,
                               pendingTransactions: [],
-                              existingTransactions: [])
+                              existingTransactions: [],
+                              productIdentifiers: productIds)
             update(user: user, callbackQueue: callbackQueue) { (error) in
                 completion(user, error)
             }
@@ -50,7 +53,8 @@ public struct YXLocalUserManager:YXUserManager {
         let existingTrasnactions = dict[existingTransactionKey] ?? []
         let user = YXUser(identifier: userId,
                           pendingTransactions: pendingTransactions,
-                          existingTransactions: existingTrasnactions)
+                          existingTransactions: existingTrasnactions,
+                          productIdentifiers: productIds)
         callbackQueue.async {
             completion(user, /*error= */nil)
         }

@@ -20,12 +20,14 @@ class YXLocalUserManagerTest: XCTestCase {
         "transaction3",
         "transaction4",
     ]
+    private let productIds:Set<String> = []
     private let existingTransactionKey = "com.yx.existingTransactions"
     private let pendingTransactionKey = "com.yx.pendingTransactions"
     private var manager:YXUserManager!
     
     override func setUp() {
-        manager = YXLocalUserManager(userIdentifier:userId)
+        manager = YXLocalUserManager(userIdentifier:userId,
+                                     productIdentifiers:productIds)
         super.setUp()
     }
 
@@ -52,7 +54,8 @@ class YXLocalUserManagerTest: XCTestCase {
         let exp = expectation(description: "wrong user id is handled.")
         let wrongUser = YXUser(identifier: wrongId,
                                pendingTransactions: pendingTransactions,
-                               existingTransactions: existingTransactions)
+                               existingTransactions: existingTransactions,
+                               productIdentifiers: productIds)
         manager.update(user: wrongUser, callbackQueue: .main) { (error) in
             XCTAssertEqual(error?.domain, YXErrorDomain.user)
             XCTAssertEqual(error?.type, YXErrorType.wrongUser)
@@ -65,7 +68,8 @@ class YXLocalUserManagerTest: XCTestCase {
         let exp = expectation(description: "user can be updated.")
         let expectedUser = YXUser(identifier: userId,
                                   pendingTransactions: pendingTransactions,
-                                  existingTransactions: existingTransactions)
+                                  existingTransactions: existingTransactions,
+                                  productIdentifiers: productIds)
         manager.update(user: expectedUser, callbackQueue: .main,
                        completion: {[weak self] (error) in
             self?.manager.user(callbackQueue: .main) {(user, error) in
