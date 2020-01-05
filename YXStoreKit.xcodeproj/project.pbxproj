@@ -166,7 +166,6 @@
 		691C5A9223B092B700AFA52C /* YXStoreKit */ = {
 			isa = PBXGroup;
 			children = (
-				699CCFA023B893BB00B5C2FE /* Test */,
 				691C5ABE23B0A3CA00AFA52C /* Utility */,
 				691C5AAD23B0957600AFA52C /* Implementation */,
 				691C5AAC23B0956D00AFA52C /* API */,
@@ -179,6 +178,7 @@
 		691C5A9D23B092B800AFA52C /* YXStoreKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				699CCFA023B893BB00B5C2FE /* Test */,
 				691C5A9E23B092B800AFA52C /* YXStoreKitTests.swift */,
 				691C5AA023B092B800AFA52C /* Info.plist */,
 				691C5AB023B0987B00AFA52C /* SKProduct+PurchasableTest.swift */,
