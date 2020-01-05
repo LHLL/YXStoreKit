@@ -42,7 +42,7 @@ class YXLocalUserManagerTest: XCTestCase {
         manager.user(callbackQueue: .main) {[weak self] (user, error) in
             XCTAssertNil(error)
             XCTAssertEqual(user?.identifier, self?.userId)
-            XCTAssertEqual(user?.existingTransactions, [])
+            XCTAssertEqual(user?.existingSubscriptions, [])
             XCTAssertEqual(user?.pendingTransactions, [])
             exp.fulfill()
         }
@@ -54,7 +54,7 @@ class YXLocalUserManagerTest: XCTestCase {
         let exp = expectation(description: "wrong user id is handled.")
         let wrongUser = YXUser(identifier: wrongId,
                                pendingTransactions: pendingTransactions,
-                               existingTransactions: existingTransactions,
+                               existingSubscriptions: existingTransactions,
                                productIdentifiers: productIds)
         manager.update(user: wrongUser, callbackQueue: .main) { (error) in
             XCTAssertEqual(error?.domain, YXErrorDomain.user)
@@ -68,7 +68,7 @@ class YXLocalUserManagerTest: XCTestCase {
         let exp = expectation(description: "user can be updated.")
         let expectedUser = YXUser(identifier: userId,
                                   pendingTransactions: pendingTransactions,
-                                  existingTransactions: existingTransactions,
+                                  existingSubscriptions: existingTransactions,
                                   productIdentifiers: productIds)
         manager.update(user: expectedUser, callbackQueue: .main,
                        completion: {[weak self] (error) in

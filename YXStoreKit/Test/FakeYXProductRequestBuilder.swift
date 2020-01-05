@@ -9,6 +9,7 @@
 import Foundation
 import StoreKit
 
+/** Testable implementation of [YXProductRequestBuilder]. */
 struct FakeYXProductRequestBuilder: YXProductRequestBuilder {
     private let invalidIds:[String]
     private let mode:YXFakeRequestMode

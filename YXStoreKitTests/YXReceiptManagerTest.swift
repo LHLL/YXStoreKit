@@ -36,7 +36,9 @@ class YXReceiptManagerTest: XCTestCase {
     func testReceiptMissing(){
         let exp = expectation(description: "Missing local receipt is handled.")
         let validator = FakeYXReceiptValidator(expectedData: Data())
-        let manager = YXReceiptManagerImpl(receiptValidator:validator, receiptUrl:url)
+        let builder = FakeYXReceiptRefreshRequestBuilder(mode: .normal, receipt: nil, url: nil)
+        let manager = YXReceiptManagerImpl(receiptValidator:validator,
+                                           receiptRefresher: YXReceiptRefresherImpl(requestBuilder: builder), receiptUrl:url)
         manager.validateReceipt(callbackQueue: .main) { (error) in
             XCTAssertEqual((error as? YXError)?.domain, YXErrorDomain.receipt)
             XCTAssertEqual((error as? YXError)?.type, YXErrorType.receiptMissing)
@@ -50,8 +52,14 @@ class YXReceiptManagerTest: XCTestCase {
         let data = "test".data(using: .utf8)
         XCTAssertNotNil(data)
         write(data: data!)
+        let builder = FakeYXReceiptRefreshRequestBuilder(mode:.normal,
+                                                         receipt: nil,
+                                                         url: nil)
+        let refresher = YXReceiptRefresherImpl(requestBuilder: builder)
         let validator = FakeYXReceiptValidator(expectedData: data!)
-        let manager = YXReceiptManagerImpl(receiptValidator:validator, receiptUrl:url)
+        let manager = YXReceiptManagerImpl(receiptValidator:validator,
+                                           receiptRefresher: refresher,
+                                           receiptUrl:url)
         manager.validateReceipt(callbackQueue: .main) { (error) in
             XCTAssertNil(error)
             exp.fulfill()
@@ -61,14 +69,39 @@ class YXReceiptManagerTest: XCTestCase {
     
     func testReceiptMissingReceiptUrl(){
         let exp = expectation(description: "Missing local receipt url is handled.")
+        let builder = FakeYXReceiptRefreshRequestBuilder(mode:.normal,
+                                                         receipt: nil,
+                                                         url: nil)
+        let refresher = YXReceiptRefresherImpl(requestBuilder: builder)
         let validator = FakeYXReceiptValidator(expectedData: Data())
-        let manager = YXReceiptManagerImpl(receiptValidator:validator, receiptUrl:nil)
+        let manager = YXReceiptManagerImpl(receiptValidator:validator,
+                                           receiptRefresher:refresher,
+                                           receiptUrl:nil)
         manager.validateReceipt(callbackQueue: .main) { (error) in
             XCTAssertEqual((error as? YXError)?.domain, YXErrorDomain.receipt)
             XCTAssertEqual((error as? YXError)?.type, YXErrorType.receiptMissing)
             exp.fulfill()
         }
-        waitForExpectations(timeout: 0.25, handler: nil)
+        waitForExpectations(timeout: 1.25, handler: nil)
+    }
+    
+    func testRefresher(){
+        let exp = expectation(description: "automatica receipt refresh is handled.")
+        let data = "test".data(using: .utf8)
+        XCTAssertNotNil(data)
+        let builder = FakeYXReceiptRefreshRequestBuilder(mode:.normal,
+                                                         receipt: data,
+                                                         url: url)
+        let refresher = YXReceiptRefresherImpl(requestBuilder: builder)
+        let validator = FakeYXReceiptValidator(expectedData: data!)
+        let manager = YXReceiptManagerImpl(receiptValidator:validator,
+                                           receiptRefresher: refresher,
+                                           receiptUrl:url)
+        manager.validateReceipt(callbackQueue: .main) { (error) in
+            XCTAssertNil(error)
+            exp.fulfill()
+        }
+        waitForExpectations(timeout: 1.25, handler: nil)
     }
 
 }

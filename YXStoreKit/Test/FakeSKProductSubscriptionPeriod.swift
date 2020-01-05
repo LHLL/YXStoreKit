@@ -9,6 +9,7 @@
 import UIKit
 import StoreKit
 
+/** Testable implementation of [SKProductSubscriptionPeriod]. */
 class FakeSKProductSubscriptionPeriod: SKProductSubscriptionPeriod {
     
     override

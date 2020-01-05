@@ -30,15 +30,29 @@ class YXProductServiceTest: XCTestCase {
     ]
 
     func testFetchProducts(){
-        let exp = expectation(description: "fetch products")
+        let exp = expectation(description: "fetch products.")
         let builder = FakeYXProductRequestBuilder(invalidIdentifiers: invalidIds,
                                                   requestMode: .normal)
         let service = YXProductServiceImpl(builder: builder)
         service.fetchProducts(productIds: productIds, callbackQueue: .main) { [weak self] (products, invalids, error) in
-            exp.fulfill()
             XCTAssertNil(error)
             XCTAssertEqual(invalids, self?.invalidIds)
             XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
+            exp.fulfill()
+        }
+        waitForExpectations(timeout: 0.25, handler: nil)
+    }
+    
+    func testErrorHandling(){
+        let exp = expectation(description: "error is handled.")
+        let builder = FakeYXProductRequestBuilder(invalidIdentifiers: invalidIds,
+                                                  requestMode: .cancel)
+        let service = YXProductServiceImpl(builder: builder)
+        service.fetchProducts(productIds: productIds, callbackQueue: .main) { (products, invalids, error) in
+            XCTAssert(invalids.isEmpty)
+            XCTAssert(products.isEmpty)
+            exp.fulfill()
+            XCTAssertEqual(error?.domain, YXErrorDomain.products)
         }
         waitForExpectations(timeout: 0.25, handler: nil)
     }
@@ -50,24 +64,24 @@ class YXProductServiceTest: XCTestCase {
         let service = YXProductServiceImpl(builder: builder)
         var callbackCount = 0
         service.fetchProducts(productIds: productIds, callbackQueue: .main) { [weak self] (products, invalids, error) in
+            XCTAssertNil(error)
+            XCTAssertEqual(invalids, self?.invalidIds)
+            XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
             if callbackCount == 1 {
                 exp.fulfill()
             } else {
                 callbackCount += 1
             }
-            XCTAssertNil(error)
-            XCTAssertEqual(invalids, self?.invalidIds)
-            XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
         }
         service.fetchProducts(productIds: productIds, callbackQueue: .main) { [weak self] (products, invalids, error) in
+            XCTAssertNil(error)
+            XCTAssertEqual(invalids, self?.invalidIds)
+            XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
             if callbackCount == 1 {
                 exp.fulfill()
             } else {
                 callbackCount += 1
             }
-            XCTAssertNil(error)
-            XCTAssertEqual(invalids, self?.invalidIds)
-            XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
         }
         waitForExpectations(timeout: 1.25, handler: nil)
     }
@@ -79,24 +93,24 @@ class YXProductServiceTest: XCTestCase {
         let service = YXProductServiceImpl(builder: builder)
         var callbackCount = 0
         service.fetchProducts(productIds: productIds, callbackQueue: .main) { [weak self] (products, invalids, error) in
+            XCTAssertNil(error)
+            XCTAssertEqual(invalids, self?.invalidIds)
+            XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
             if callbackCount == 1 {
                 exp.fulfill()
             } else {
                 callbackCount += 1
             }
-            XCTAssertNil(error)
-            XCTAssertEqual(invalids, self?.invalidIds)
-            XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
         }
         service.fetchProducts(productIds: validIds, callbackQueue: .main) { [weak self] (products, invalids, error) in
+            XCTAssertNil(error)
+            XCTAssertEqual(invalids, self?.invalidIds)
+            XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
             if callbackCount == 1 {
                 exp.fulfill()
             } else {
                 callbackCount += 1
             }
-            XCTAssertNil(error)
-            XCTAssertEqual(invalids, self?.invalidIds)
-            XCTAssertEqual(products.map({$0.productIdentifier}).sorted(), self?.expectedProductsIds)
         }
         waitForExpectations(timeout: 1.25, handler: nil)
     }

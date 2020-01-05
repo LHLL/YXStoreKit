@@ -26,11 +26,11 @@ public struct YXUser:Equatable {
     let pendingTransactions:[String]
     
     /**
-     * A list of strings that each of them uniquely identifies a finished transaction.
+     * A list of strings that each of them uniquely identifies a subscription.
      *
      * Idearly, this value should be stored on the server side and fetched as soon as app launches.
      */
-    let existingTransactions:[String]
+    let existingSubscriptions:[String]
     
     /**
      * A list of products that are available for the user to purchase.

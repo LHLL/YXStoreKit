@@ -16,10 +16,14 @@ enum YXFakeRequestMode{
     // Uses this mode for testing [cancel].
     case idle
     // Request will not instantly finish after [start] call.
-    // use this mode for duplicate requests.
+    // Use this mode for duplicate requests.
     case delayed
+    // Request will instantly cancel.
+    // Use this one for integration test.
+    case cancel
 }
 
+/** Testable SKProductsRequest. */
 class FakeSKProductsRequest: SKProductsRequest {
     
     private var productsIds: Set<String> = []
@@ -28,9 +32,9 @@ class FakeSKProductsRequest: SKProductsRequest {
     
     convenience init(productIdentifiers: Set<String>, invalidIdentifiers:[String], requestMode:YXFakeRequestMode) {
         self.init(productIdentifiers: productIdentifiers)
-        self.productsIds = productIdentifiers
-        self.invalidIds = invalidIdentifiers
-        self.mode = requestMode
+        productsIds = productIdentifiers
+        invalidIds = invalidIdentifiers
+        mode = requestMode
     }
     
     override
@@ -53,6 +57,8 @@ class FakeSKProductsRequest: SKProductsRequest {
             }
         case .idle:
             return
+        case .cancel:
+            cancel()
         }
     }
     

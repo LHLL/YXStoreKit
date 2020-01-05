@@ -9,6 +9,7 @@
 import UIKit
 import StoreKit
 
+/** Testable SKProductsResponse. */
 class FakeSKProductsResponse: SKProductsResponse {
     
     override

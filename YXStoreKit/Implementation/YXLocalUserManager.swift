@@ -24,7 +24,7 @@ public struct YXLocalUserManager:YXUserManager {
     private let userId:String
     private let productIds:Set<String>
     private let userDefaults = UserDefaults.standard
-    private let existingTransactionKey = "com.yx.existingTransactions"
+    private let existingSubscriptionKey = "com.yx.existingTransactions"
     private let pendingTransactionKey = "com.yx.pendingTransactions"
     
     public init(userIdentifier:String, productIdentifiers:Set<String>) {
@@ -36,7 +36,7 @@ public struct YXLocalUserManager:YXUserManager {
         guard let userDict = userDefaults.dictionary(forKey: userId) else{
             let user = YXUser(identifier: userId,
                               pendingTransactions: [],
-                              existingTransactions: [],
+                              existingSubscriptions: [],
                               productIdentifiers: productIds)
             update(user: user, callbackQueue: callbackQueue) { (error) in
                 completion(user, error)
@@ -50,10 +50,10 @@ public struct YXLocalUserManager:YXUserManager {
             return
         }
         let pendingTransactions = dict[pendingTransactionKey] ?? []
-        let existingTrasnactions = dict[existingTransactionKey] ?? []
+        let existingTrasnactions = dict[existingSubscriptionKey] ?? []
         let user = YXUser(identifier: userId,
                           pendingTransactions: pendingTransactions,
-                          existingTransactions: existingTrasnactions,
+                          existingSubscriptions: existingTrasnactions,
                           productIdentifiers: productIds)
         callbackQueue.async {
             completion(user, /*error= */nil)
@@ -70,7 +70,7 @@ public struct YXLocalUserManager:YXUserManager {
             return
         }
         let userDict = [
-            existingTransactionKey: user.existingTransactions,
+            existingSubscriptionKey: user.existingSubscriptions,
             pendingTransactionKey: user.pendingTransactions
         ]
         userDefaults.set(userDict, forKey: userId)

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/** Testable implementation of [YXReceiptValidator]. */
 struct FakeYXReceiptValidator:YXReceiptValidator {
     
     private let data:Data

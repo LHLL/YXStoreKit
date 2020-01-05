@@ -17,7 +17,6 @@
 		691C5AB323B0996000AFA52C /* SKProduct+Purchasable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C5AAE23B0959100AFA52C /* SKProduct+Purchasable.swift */; };
 		691C5AB523B099F100AFA52C /* FakeSKProductSubscriptionPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C5AB423B099F100AFA52C /* FakeSKProductSubscriptionPeriod.swift */; };
 		691C5AB723B09C3100AFA52C /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C5AB623B09C3100AFA52C /* ProductService.swift */; };
-		691C5ABB23B09E5B00AFA52C /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C5ABA23B09E5B00AFA52C /* Requests.swift */; };
 		691C5ABD23B0A1ED00AFA52C /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C5ABC23B0A1ED00AFA52C /* Error.swift */; };
 		691C5AC023B0A3D900AFA52C /* YXDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C5ABF23B0A3D900AFA52C /* YXDictionary.swift */; };
 		691C5AC123B0A52400AFA52C /* YXDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691C5ABF23B0A3D900AFA52C /* YXDictionary.swift */; };
@@ -41,6 +40,23 @@
 		697364FC23BBFD23006C9332 /* YXLocalUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364FB23BBFD23006C9332 /* YXLocalUserManager.swift */; };
 		697364FD23BBFD23006C9332 /* YXLocalUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364FB23BBFD23006C9332 /* YXLocalUserManager.swift */; };
 		697364FF23BC057A006C9332 /* YXLocalUserManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697364FE23BC057A006C9332 /* YXLocalUserManagerTest.swift */; };
+		6973650423BC19B7006C9332 /* TransactionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973650323BC19B7006C9332 /* TransactionEvent.swift */; };
+		6973650523BC19B7006C9332 /* TransactionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973650323BC19B7006C9332 /* TransactionEvent.swift */; };
+		6973650723BC277B006C9332 /* YXTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973650623BC277B006C9332 /* YXTransactionResponse.swift */; };
+		6973650823BC277B006C9332 /* YXTransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973650623BC277B006C9332 /* YXTransactionResponse.swift */; };
+		6973650A23BC27C1006C9332 /* YXTransactionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973650923BC27C1006C9332 /* YXTransactionProcessor.swift */; };
+		6973650B23BC27C1006C9332 /* YXTransactionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973650923BC27C1006C9332 /* YXTransactionProcessor.swift */; };
+		6973650D23C0CA75006C9332 /* ReceiptRefreshRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973650C23C0CA75006C9332 /* ReceiptRefreshRequestBuilder.swift */; };
+		6973650E23C0CA75006C9332 /* ReceiptRefreshRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973650C23C0CA75006C9332 /* ReceiptRefreshRequestBuilder.swift */; };
+		6973651123C0CACD006C9332 /* FakeSKReceiptRefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973650F23C0CACD006C9332 /* FakeSKReceiptRefreshRequest.swift */; };
+		6973651323C0CD5B006C9332 /* FakeSKReceiptRefreshRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973651223C0CD5B006C9332 /* FakeSKReceiptRefreshRequestTest.swift */; };
+		6973651523C0CECD006C9332 /* YXReceiptRefreshRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973651423C0CECD006C9332 /* YXReceiptRefreshRequestBuilder.swift */; };
+		6973651723C0CFD0006C9332 /* FakeYXReceiptRefreshRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973651623C0CFD0006C9332 /* FakeYXReceiptRefreshRequestBuilder.swift */; };
+		6973651923C0D043006C9332 /* ReceiptRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973651823C0D043006C9332 /* ReceiptRefresher.swift */; };
+		6973651A23C0D043006C9332 /* ReceiptRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973651823C0D043006C9332 /* ReceiptRefresher.swift */; };
+		6973651E23C0D2E8006C9332 /* YXReceiptRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973651D23C0D2E8006C9332 /* YXReceiptRefresher.swift */; };
+		6973651F23C0D337006C9332 /* YXReceiptRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973651D23C0D2E8006C9332 /* YXReceiptRefresher.swift */; };
+		6973652323C0DE65006C9332 /* YXReceiptRefresherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6973652223C0DE65006C9332 /* YXReceiptRefresherTest.swift */; };
 		699CCFA423B8944000B5C2FE /* FakeSKProductsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CCFA323B8944000B5C2FE /* FakeSKProductsRequest.swift */; };
 		699CCFA623B8958600B5C2FE /* FakeSKProductsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CCFA523B8958600B5C2FE /* FakeSKProductsResponse.swift */; };
 		699CCFA823B895E700B5C2FE /* FakeSKProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699CCFA723B895E700B5C2FE /* FakeSKProduct.swift */; };
@@ -75,7 +91,6 @@
 		691C5AB023B0987B00AFA52C /* SKProduct+PurchasableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKProduct+PurchasableTest.swift"; sourceTree = "<group>"; };
 		691C5AB423B099F100AFA52C /* FakeSKProductSubscriptionPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSKProductSubscriptionPeriod.swift; sourceTree = "<group>"; };
 		691C5AB623B09C3100AFA52C /* ProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
-		691C5ABA23B09E5B00AFA52C /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		691C5ABC23B0A1ED00AFA52C /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		691C5ABF23B0A3D900AFA52C /* YXDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXDictionary.swift; sourceTree = "<group>"; };
 		691C5AC223B0A79000AFA52C /* YXDictionaryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXDictionaryTest.swift; sourceTree = "<group>"; };
@@ -91,6 +106,17 @@
 		697364F823BBEDB3006C9332 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		697364FB23BBFD23006C9332 /* YXLocalUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXLocalUserManager.swift; sourceTree = "<group>"; };
 		697364FE23BC057A006C9332 /* YXLocalUserManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXLocalUserManagerTest.swift; sourceTree = "<group>"; };
+		6973650323BC19B7006C9332 /* TransactionEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEvent.swift; sourceTree = "<group>"; };
+		6973650623BC277B006C9332 /* YXTransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXTransactionResponse.swift; sourceTree = "<group>"; };
+		6973650923BC27C1006C9332 /* YXTransactionProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXTransactionProcessor.swift; sourceTree = "<group>"; };
+		6973650C23C0CA75006C9332 /* ReceiptRefreshRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRefreshRequestBuilder.swift; sourceTree = "<group>"; };
+		6973650F23C0CACD006C9332 /* FakeSKReceiptRefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSKReceiptRefreshRequest.swift; sourceTree = "<group>"; };
+		6973651223C0CD5B006C9332 /* FakeSKReceiptRefreshRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSKReceiptRefreshRequestTest.swift; sourceTree = "<group>"; };
+		6973651423C0CECD006C9332 /* YXReceiptRefreshRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXReceiptRefreshRequestBuilder.swift; sourceTree = "<group>"; };
+		6973651623C0CFD0006C9332 /* FakeYXReceiptRefreshRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeYXReceiptRefreshRequestBuilder.swift; sourceTree = "<group>"; };
+		6973651823C0D043006C9332 /* ReceiptRefresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptRefresher.swift; sourceTree = "<group>"; };
+		6973651D23C0D2E8006C9332 /* YXReceiptRefresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXReceiptRefresher.swift; sourceTree = "<group>"; };
+		6973652223C0DE65006C9332 /* YXReceiptRefresherTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YXReceiptRefresherTest.swift; sourceTree = "<group>"; };
 		699CCFA323B8944000B5C2FE /* FakeSKProductsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSKProductsRequest.swift; sourceTree = "<group>"; };
 		699CCFA523B8958600B5C2FE /* FakeSKProductsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSKProductsResponse.swift; sourceTree = "<group>"; };
 		699CCFA723B895E700B5C2FE /* FakeSKProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSKProduct.swift; sourceTree = "<group>"; };
@@ -162,6 +188,8 @@
 				697364E323BACBE2006C9332 /* FakeYXReceiptValidatorTest.swift */,
 				697364F023BBCF5A006C9332 /* YXReceiptManagerTest.swift */,
 				697364FE23BC057A006C9332 /* YXLocalUserManagerTest.swift */,
+				6973651223C0CD5B006C9332 /* FakeSKReceiptRefreshRequestTest.swift */,
+				6973652223C0DE65006C9332 /* YXReceiptRefresherTest.swift */,
 			);
 			path = YXStoreKitTests;
 			sourceTree = "<group>";
@@ -169,14 +197,11 @@
 		691C5AAC23B0956D00AFA52C /* API */ = {
 			isa = PBXGroup;
 			children = (
-				691C5AAA23B0931500AFA52C /* Purchasable.swift */,
-				691C5AB623B09C3100AFA52C /* ProductService.swift */,
-				691C5ABA23B09E5B00AFA52C /* Requests.swift */,
+				6973651C23C0D0B2006C9332 /* Product */,
+				6973651B23C0D054006C9332 /* Receipt */,
 				691C5ABC23B0A1ED00AFA52C /* Error.swift */,
-				699CCFAF23B9CE2000B5C2FE /* ProductRequestBuilder.swift */,
-				697364DE23BAC85D006C9332 /* ReceiptValidator.swift */,
-				697364E523BACE17006C9332 /* ReceiptManager.swift */,
 				697364F823BBEDB3006C9332 /* UserManager.swift */,
+				6973650323BC19B7006C9332 /* TransactionEvent.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -184,10 +209,8 @@
 		691C5AAD23B0957600AFA52C /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
-				691C5AAE23B0959100AFA52C /* SKProduct+Purchasable.swift */,
-				699CCFB423B9D01000B5C2FE /* YXProductRequestBuilderImp.swift */,
-				697364EC23BBCA4F006C9332 /* YXProductServiceImpl.swift */,
-				697364E823BACFE2006C9332 /* YXReceiptManagerImpl.swift */,
+				6973652123C0D468006C9332 /* Product */,
+				6973652023C0D45E006C9332 /* Receipt */,
 				697364FB23BBFD23006C9332 /* YXLocalUserManager.swift */,
 			);
 			path = Implementation;
@@ -198,8 +221,51 @@
 			children = (
 				691C5ABF23B0A3D900AFA52C /* YXDictionary.swift */,
 				697364F523BBEA7E006C9332 /* YXUser.swift */,
+				6973650623BC277B006C9332 /* YXTransactionResponse.swift */,
+				6973650923BC27C1006C9332 /* YXTransactionProcessor.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		6973651B23C0D054006C9332 /* Receipt */ = {
+			isa = PBXGroup;
+			children = (
+				697364E523BACE17006C9332 /* ReceiptManager.swift */,
+				6973650C23C0CA75006C9332 /* ReceiptRefreshRequestBuilder.swift */,
+				6973651823C0D043006C9332 /* ReceiptRefresher.swift */,
+				697364DE23BAC85D006C9332 /* ReceiptValidator.swift */,
+			);
+			path = Receipt;
+			sourceTree = "<group>";
+		};
+		6973651C23C0D0B2006C9332 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				691C5AAA23B0931500AFA52C /* Purchasable.swift */,
+				691C5AB623B09C3100AFA52C /* ProductService.swift */,
+				699CCFAF23B9CE2000B5C2FE /* ProductRequestBuilder.swift */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		6973652023C0D45E006C9332 /* Receipt */ = {
+			isa = PBXGroup;
+			children = (
+				697364E823BACFE2006C9332 /* YXReceiptManagerImpl.swift */,
+				6973651423C0CECD006C9332 /* YXReceiptRefreshRequestBuilder.swift */,
+				6973651D23C0D2E8006C9332 /* YXReceiptRefresher.swift */,
+			);
+			path = Receipt;
+			sourceTree = "<group>";
+		};
+		6973652123C0D468006C9332 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				691C5AAE23B0959100AFA52C /* SKProduct+Purchasable.swift */,
+				699CCFB423B9D01000B5C2FE /* YXProductRequestBuilderImp.swift */,
+				697364EC23BBCA4F006C9332 /* YXProductServiceImpl.swift */,
+			);
+			path = Product;
 			sourceTree = "<group>";
 		};
 		699CCFA023B893BB00B5C2FE /* Test */ = {
@@ -211,6 +277,8 @@
 				699CCFA723B895E700B5C2FE /* FakeSKProduct.swift */,
 				699CCFB123B9CEF100B5C2FE /* FakeYXProductRequestBuilder.swift */,
 				697364E023BACA5F006C9332 /* FakeYXReceiptValidator.swift */,
+				6973650F23C0CACD006C9332 /* FakeSKReceiptRefreshRequest.swift */,
+				6973651623C0CFD0006C9332 /* FakeYXReceiptRefreshRequestBuilder.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -325,17 +393,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6973651923C0D043006C9332 /* ReceiptRefresher.swift in Sources */,
+				6973650A23BC27C1006C9332 /* YXTransactionProcessor.swift in Sources */,
 				691C5AC023B0A3D900AFA52C /* YXDictionary.swift in Sources */,
 				691C5AAF23B0959100AFA52C /* SKProduct+Purchasable.swift in Sources */,
+				6973651523C0CECD006C9332 /* YXReceiptRefreshRequestBuilder.swift in Sources */,
 				697364F923BBEDB3006C9332 /* UserManager.swift in Sources */,
 				699CCFB023B9CE2000B5C2FE /* ProductRequestBuilder.swift in Sources */,
-				691C5ABB23B09E5B00AFA52C /* Requests.swift in Sources */,
 				697364DF23BAC85D006C9332 /* ReceiptValidator.swift in Sources */,
 				691C5AAB23B0931500AFA52C /* Purchasable.swift in Sources */,
 				691C5ABD23B0A1ED00AFA52C /* Error.swift in Sources */,
+				6973650D23C0CA75006C9332 /* ReceiptRefreshRequestBuilder.swift in Sources */,
 				699CCFB523B9D01000B5C2FE /* YXProductRequestBuilderImp.swift in Sources */,
 				697364F623BBEA7E006C9332 /* YXUser.swift in Sources */,
+				6973650723BC277B006C9332 /* YXTransactionResponse.swift in Sources */,
+				6973651E23C0D2E8006C9332 /* YXReceiptRefresher.swift in Sources */,
 				697364FC23BBFD23006C9332 /* YXLocalUserManager.swift in Sources */,
+				6973650423BC19B7006C9332 /* TransactionEvent.swift in Sources */,
 				697364E923BACFE2006C9332 /* YXReceiptManagerImpl.swift in Sources */,
 				697364E623BACE17006C9332 /* ReceiptManager.swift in Sources */,
 				697364ED23BBCA4F006C9332 /* YXProductServiceImpl.swift in Sources */,
@@ -349,21 +423,26 @@
 			files = (
 				697364F123BBCF5A006C9332 /* YXReceiptManagerTest.swift in Sources */,
 				699CCFA423B8944000B5C2FE /* FakeSKProductsRequest.swift in Sources */,
+				6973651F23C0D337006C9332 /* YXReceiptRefresher.swift in Sources */,
 				691C5AC123B0A52400AFA52C /* YXDictionary.swift in Sources */,
 				699CCFA823B895E700B5C2FE /* FakeSKProduct.swift in Sources */,
 				699CCFA923B898E400B5C2FE /* Error.swift in Sources */,
 				697364DD23B9E00C006C9332 /* YXSKProductsRequestTest.swift in Sources */,
 				691C5AB123B0987B00AFA52C /* SKProduct+PurchasableTest.swift in Sources */,
+				6973650523BC19B7006C9332 /* TransactionEvent.swift in Sources */,
 				697364FD23BBFD23006C9332 /* YXLocalUserManager.swift in Sources */,
 				691C5AC323B0A79000AFA52C /* YXDictionaryTest.swift in Sources */,
 				697364E123BACA5F006C9332 /* FakeYXReceiptValidator.swift in Sources */,
 				697364EE23BBCA9E006C9332 /* YXProductServiceImpl.swift in Sources */,
 				697364EF23BBCE3D006C9332 /* YXReceiptManagerImpl.swift in Sources */,
 				691C5A9F23B092B800AFA52C /* YXStoreKitTests.swift in Sources */,
+				6973652323C0DE65006C9332 /* YXReceiptRefresherTest.swift in Sources */,
+				6973651A23C0D043006C9332 /* ReceiptRefresher.swift in Sources */,
 				697364E423BACBE2006C9332 /* FakeYXReceiptValidatorTest.swift in Sources */,
 				699CCFB323B9CF5600B5C2FE /* ProductRequestBuilder.swift in Sources */,
 				699CCFAC23B899BB00B5C2FE /* ProductService.swift in Sources */,
 				699CCFB223B9CEF100B5C2FE /* FakeYXProductRequestBuilder.swift in Sources */,
+				6973650B23BC27C1006C9332 /* YXTransactionProcessor.swift in Sources */,
 				697364FF23BC057A006C9332 /* YXLocalUserManagerTest.swift in Sources */,
 				699CCFB723B9D1EB00B5C2FE /* YXProductServiceTest.swift in Sources */,
 				697364E223BACA6A006C9332 /* ReceiptValidator.swift in Sources */,
@@ -371,9 +450,14 @@
 				691C5AB323B0996000AFA52C /* SKProduct+Purchasable.swift in Sources */,
 				699CCFA623B8958600B5C2FE /* FakeSKProductsResponse.swift in Sources */,
 				691C5AB223B0995300AFA52C /* Purchasable.swift in Sources */,
+				6973651723C0CFD0006C9332 /* FakeYXReceiptRefreshRequestBuilder.swift in Sources */,
 				697364E723BACEB5006C9332 /* ReceiptManager.swift in Sources */,
 				691C5AB523B099F100AFA52C /* FakeSKProductSubscriptionPeriod.swift in Sources */,
 				697364F723BBEA7E006C9332 /* YXUser.swift in Sources */,
+				6973650E23C0CA75006C9332 /* ReceiptRefreshRequestBuilder.swift in Sources */,
+				6973650823BC277B006C9332 /* YXTransactionResponse.swift in Sources */,
+				6973651323C0CD5B006C9332 /* FakeSKReceiptRefreshRequestTest.swift in Sources */,
+				6973651123C0CACD006C9332 /* FakeSKReceiptRefreshRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

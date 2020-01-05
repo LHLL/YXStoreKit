@@ -32,6 +32,10 @@ public enum YXErrorType:Equatable {
     // When user switches the account, client app needs to create a new
     // instance of [YXLocalUserManager]
     case wrongUser
+    // The product is not available for the user anymore.
+    // This normally happens when a product is disabled after the transaction
+    // been created.
+    case unavailableProduct
     // Custom error
     case normal(reason:String)
 }
@@ -55,6 +59,8 @@ extension YXErrorType {
             return "Unexpected user object received from the database."
         case .wrongUser:
             return "Passed-in user is different than the current user."
+        case .unavailableProduct:
+            return "This product is no longer available for the current user."
         case .normal(let reason):
             return reason
         }
