@@ -14,9 +14,9 @@ import Foundation
  * Not recommanded to be used in the production app duo to:
  *    1. Infomation will not be encrypted and could be leaked.
  *    2. User has to finish the transaction on the same device where the transaction was initiated
- *      which could potentially cause confusion since user could have multiple iOS devices signed
- *      in with same Apple ID.
- *    3. If the app is deleted by accidently, all associated user data will be pruned at same time that
+ *      which could potentially cause confusion since user may have multiple iOS devices signed
+ *      in with the same Apple ID.
+ *    3. If the app is deleted by accident, all associated user data will be pruned at the same time that
  *      could cause future issues for clients that sell auto-renewable subscriptions via IAP.
  */
 public struct YXLocalUserManager:YXUserManager {

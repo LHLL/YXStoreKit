@@ -40,8 +40,8 @@ class YXReceiptManagerTest: XCTestCase {
         let manager = YXReceiptManagerImpl(receiptValidator:validator,
                                            receiptRefresher: YXReceiptRefresherImpl(requestBuilder: builder), receiptUrl:url)
         manager.validateReceipt(callbackQueue: .main) { (error) in
-            XCTAssertEqual((error as? YXError)?.domain, YXErrorDomain.receipt)
-            XCTAssertEqual((error as? YXError)?.type, YXErrorType.receiptMissing)
+            XCTAssertEqual(error?.domain, YXErrorDomain.receipt)
+            XCTAssertEqual(error?.type, YXErrorType.receiptMissing)
             exp.fulfill()
         }
         waitForExpectations(timeout: 0.25, handler: nil)
@@ -78,8 +78,8 @@ class YXReceiptManagerTest: XCTestCase {
                                            receiptRefresher:refresher,
                                            receiptUrl:nil)
         manager.validateReceipt(callbackQueue: .main) { (error) in
-            XCTAssertEqual((error as? YXError)?.domain, YXErrorDomain.receipt)
-            XCTAssertEqual((error as? YXError)?.type, YXErrorType.receiptMissing)
+            XCTAssertEqual(error?.domain, YXErrorDomain.receipt)
+            XCTAssertEqual(error?.type, YXErrorType.receiptMissing)
             exp.fulfill()
         }
         waitForExpectations(timeout: 1.25, handler: nil)

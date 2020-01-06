@@ -36,6 +36,16 @@ public enum YXErrorType:Equatable {
     // This normally happens when a product is disabled after the transaction
     // been created.
     case unavailableProduct
+    // A transaction of same product for the same user is still pending.
+    // This normally happends when user clicks on buy multiple times.
+    case duplicateTransaction
+    // Payment system is not ready to accept new payments.
+    // https://developer.apple.com/documentation/storekit/skpaymentqueue/1506139-canmakepayments
+    case systemNotReady
+    // User has transactions with a different Apple ID.
+    case wrongAppleId
+    // User tries to purchase a subscription that the user is owning.
+    case existingSubscription
     // Custom error
     case normal(reason:String)
 }
@@ -61,6 +71,14 @@ extension YXErrorType {
             return "Passed-in user is different than the current user."
         case .unavailableProduct:
             return "This product is no longer available for the current user."
+        case .duplicateTransaction:
+            return "A transaction of same product is found."
+        case .systemNotReady:
+            return "Payment system is not ready or disabled for this device."
+        case .wrongAppleId:
+            return "User has signed in with a wrong Apple ID."
+        case .existingSubscription:
+            return "user already has this subscription"
         case .normal(let reason):
             return reason
         }

@@ -40,7 +40,7 @@ class YXSKProductsRequestTest: XCTestCase {
         waitForExpectations(timeout: 0.25, handler: nil)
     }
     
-    func testCalcel() {
+    func testCancel() {
         exp = expectation(description: "test cancel")
         let request = FakeSKProductsRequest(productIdentifiers: productIds,
                                             invalidIdentifiers: invalidIds,

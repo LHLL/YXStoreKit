@@ -16,5 +16,5 @@ public protocol YXReceiptManager {
      * @param callbackQueue A queue that the completion block will be called in.
      * @param completion A block to be invoked when the async method is finished.
      */
-    func validateReceipt(callbackQueue:DispatchQueue, completion:@escaping ((Error?)->Void))
+    func validateReceipt(callbackQueue:DispatchQueue, completion:@escaping ((YXError?)->Void))
 }

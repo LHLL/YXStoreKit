@@ -32,7 +32,7 @@ public final class YXReceiptManagerImpl:YXReceiptManager {
         url = receiptUrl
     }
     
-    public func validateReceipt(callbackQueue: DispatchQueue, completion: @escaping ((Error?) -> Void)) {
+    public func validateReceipt(callbackQueue: DispatchQueue, completion: @escaping ((YXError?) -> Void)) {
         queue.async {
             guard let url = self.url else{
                 guard self.retried else {
@@ -83,7 +83,7 @@ public final class YXReceiptManagerImpl:YXReceiptManager {
 
 //MARK: Private Method
 extension YXReceiptManagerImpl {
-    private func refresh(callbackQueue: DispatchQueue, completion: @escaping ((Error?) -> Void)) {
+    private func refresh(callbackQueue: DispatchQueue, completion: @escaping ((YXError?) -> Void)) {
         self.retried = true
         self.refresher.refresh(callbackQueue: self.queue) { [weak self] (error) in
             guard let err = error else {

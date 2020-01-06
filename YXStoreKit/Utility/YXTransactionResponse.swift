@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import StoreKit
 
 /** Object that contains result of transaction procrssing. */
 struct YXTransactionResponse {
@@ -37,9 +38,12 @@ struct YXTransactionResponse {
      */
     let disabledProductIdentifiers:[String]
     
-    /** A list of string that each of them uniquely identifies a finished transaction. */
-    let finishedTransactions:[String]
+    /** A list of finished transactions. */
+    let finishedTransactions:[SKPaymentTransaction]
     
-    /** A list of string that each of them uniquely identifies a failed transaction. */
-    let failedTransactions:[String]
+    /** A list of failed transactions. */
+    let failedTransactions:[SKPaymentTransaction]
+    
+    /** User either signed into the App Store with a different Apple ID or downloaded the app with a different ID. */
+    let wrongAppleID:Bool
 }
