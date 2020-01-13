@@ -80,7 +80,7 @@ public class YXTransactionManagerImpl:NSObject, YXTransactionManager {
                         self.queue.finishTransaction(transaction)
                         pending.removeAll(where: {$0 == transaction.payment.productIdentifier})
                         errors.append(YXError(domain: .transaction,
-                        type: .normal(reason: transaction.payment.productIdentifier)))
+                                              type: .normal(reason: transaction.payment.productIdentifier)))
                     }
                 }
                 if !response.finishedTransactions.isEmpty {

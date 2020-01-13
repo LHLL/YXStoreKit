@@ -46,6 +46,10 @@ public enum YXErrorType:Equatable {
     case wrongAppleId
     // User tries to purchase a subscription that the user is owning.
     case existingSubscription
+    // Method [start] is not called in the YXStoreKit.
+    case notStarted
+    // Method [stop] needs to be called when user account switches.
+    case notStopped
     // Custom error
     case normal(reason:String)
 }
@@ -79,6 +83,10 @@ extension YXErrorType {
             return "User has signed in with a wrong Apple ID."
         case .existingSubscription:
             return "user already has this subscription"
+        case .notStarted:
+            return "start needs to be called first in the YXStoreKit."
+        case .notStopped:
+            return "stop needs to be called when user accounts switches."
         case .normal(let reason):
             return reason
         }
@@ -96,6 +104,8 @@ public enum YXErrorDomain:Equatable {
     case receipt
     // Error that is related to the user.
     case user
+    // Error that is related to start/stop call in the YXStoreKit.
+    case system
 }
 
 extension YXErrorDomain {
@@ -111,6 +121,8 @@ extension YXErrorDomain {
             return "com.yxstorekit.receipt"
         case .user:
             return "com.yxstorekit.user"
+        case .system:
+            return "com.yxstorekit.system"
         }
     }
 }
