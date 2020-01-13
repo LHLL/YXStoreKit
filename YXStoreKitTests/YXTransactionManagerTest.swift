@@ -39,6 +39,7 @@ class YXTransactionManagerTest: XCTestCase {
     override func tearDown() {
         prune()
         XCTAssertNil(try? Data(contentsOf: receiptUrl))
+        UserDefaults.standard.removeObject(forKey: "user")
         super.tearDown()
     }
     

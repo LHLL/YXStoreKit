@@ -71,6 +71,7 @@ public class YXStoreKit {
      */
     func stop(){
         self.requestQueue.async {
+            self.ready = false
             self.transactionManager.stopObserving()
         }
     }

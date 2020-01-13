@@ -204,7 +204,7 @@ extension YXTransactionManagerImpl:SKPaymentTransactionObserver {
                 return
             }
             self.manager.validateReceipt(callbackQueue: self.requestQueue) { (error) in
-                guard (error != nil) else {
+                guard (error == nil) else {
                     let queue = self.callbackQueue
                     self.callbackQueue = nil
                     let completion = self.callbackCompletion

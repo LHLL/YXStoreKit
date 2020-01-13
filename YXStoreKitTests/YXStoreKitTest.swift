@@ -35,6 +35,7 @@ class YXStoreKitTest: XCTestCase {
         productService = YXProductServiceImpl(builder: builder)
         
         let data = "test".data(using: .utf8)!
+        write(data: data)
         let validator = FakeYXReceiptValidator(expectedData: data)
         let refresher = YXReceiptRefresherImpl(requestBuilder: FakeYXReceiptRefreshRequestBuilder(mode: .normal,
                                                                                                   receipt: data,
@@ -45,8 +46,9 @@ class YXStoreKitTest: XCTestCase {
     }
 
     override func tearDown() {
-        try? FileManager.default.removeItem(at: receiptUrl)
+        prune()
         XCTAssertNil(try? Data(contentsOf: receiptUrl))
+        UserDefaults.standard.removeObject(forKey: user)
         super.tearDown()
     }
     
@@ -62,6 +64,66 @@ class YXStoreKitTest: XCTestCase {
         storeKit.start(callbackQueue: .main) { (errors) in
             XCTAssert(errors.isEmpty)
             exp.fulfill()
+        }
+        waitForExpectations(timeout: 0.25, handler: nil)
+    }
+    
+    func testStartObservingOnNoUser() {
+        let exp = expectation(description: "An empty transaction queue will be handled")
+        let trasnactionManager = YXTransactionManagerImpl(paymentQueue: FakeSKPaymentQueue(transactions: []),
+                                                          receiptManager: receiptManager,
+                                                          userManager: userManager)
+        let storeKit = YXStoreKit(user: userManager,
+                                  product: productService,
+                                  receipt: receiptManager,
+                                  transaction: trasnactionManager)
+        UserDefaults.standard.set(["1":1], forKey: user)
+        storeKit.start(callbackQueue: .main) { (errors) in
+            XCTAssertEqual(errors.count, 1)
+            XCTAssertEqual(errors.first?.domain, YXErrorDomain.user)
+            XCTAssertEqual(errors.first?.type, YXErrorType.unexpectedUser)
+            exp.fulfill()
+        }
+        waitForExpectations(timeout: 0.25, handler: nil)
+    }
+    
+    func testStopObserving() {
+        let exp = expectation(description: "Stop obsvering will be handled")
+        let trasnactionManager = YXTransactionManagerImpl(paymentQueue: FakeSKPaymentQueue(transactions: []),
+                                                          receiptManager: receiptManager,
+                                                          userManager: userManager)
+        let storeKit = YXStoreKit(user: userManager,
+                                  product: productService,
+                                  receipt: receiptManager,
+                                  transaction: trasnactionManager)
+        storeKit.start(callbackQueue: .main) { (errors) in
+            XCTAssert(errors.isEmpty)
+            storeKit.start(callbackQueue: .main) { (errs) in
+                XCTAssertEqual(errs.count, 1)
+                XCTAssertEqual(errs.first?.domain, YXErrorDomain.system)
+                XCTAssertEqual(errs.first?.type, YXErrorType.notStopped)
+                exp.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 0.25, handler: nil)
+    }
+    
+    func testCanStartAfterStopObserving() {
+        let exp = expectation(description: "start after stopObsvering will be handled")
+        let trasnactionManager = YXTransactionManagerImpl(paymentQueue: FakeSKPaymentQueue(transactions: []),
+                                                          receiptManager: receiptManager,
+                                                          userManager: userManager)
+        let storeKit = YXStoreKit(user: userManager,
+                                  product: productService,
+                                  receipt: receiptManager,
+                                  transaction: trasnactionManager)
+        storeKit.start(callbackQueue: .main) { (errors) in
+            XCTAssert(errors.isEmpty)
+            storeKit.stop()
+            storeKit.start(callbackQueue: .main) { (errors) in
+                XCTAssert(errors.isEmpty)
+                exp.fulfill()
+            }
         }
         waitForExpectations(timeout: 0.25, handler: nil)
     }
@@ -244,6 +306,88 @@ class YXStoreKitTest: XCTestCase {
                 XCTAssertEqual(error?.domain, YXErrorDomain.transaction)
                 XCTAssertEqual(error?.type, YXErrorType.wrongUser)
                 exp.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 0.25, handler: nil)
+    }
+    
+    func testNoReceipt() {
+        let exp = expectation(description: "No receipt will be handled")
+        
+        let validator = FakeYXReceiptValidator(expectedData: Data())
+        let refresher = YXReceiptRefresherImpl(requestBuilder: FakeYXReceiptRefreshRequestBuilder(mode: .normal,
+                                                                                                  receipt: nil,
+                                                                                                  url: nil))
+        receiptManager = YXReceiptManagerImpl(receiptValidator: validator,
+                                              receiptRefresher: refresher,
+                                              receiptUrl: nil)
+        
+        let trasnactionManager = YXTransactionManagerImpl(paymentQueue: FakeSKPaymentQueue(transactions: []),
+                                                          receiptManager: receiptManager,
+                                                          userManager: userManager)
+        let storeKit = YXStoreKit(user: userManager,
+                                  product: productService,
+                                  receipt: receiptManager,
+                                  transaction: trasnactionManager)
+        let product = FakeSKProduct(productId: "com.test.valid1")
+        let newUser = YXUser(identifier: user,
+                             pendingTransactions: [],
+                             existingSubscriptions: [],
+                             productIdentifiers:productIdentifiers)
+        prune()
+        userManager.update(user: newUser, callbackQueue: .main) { (error) in
+            XCTAssertNil(error)
+            storeKit.start(callbackQueue: .main) { (errors) in
+                XCTAssertTrue(errors.isEmpty)
+                storeKit.purchase(product: product,
+                                  discount: nil,
+                                  quantity: 1,
+                                  callbackQueue: .main) { (error) in
+                    XCTAssertNotNil(error)
+                    XCTAssertEqual(error?.domain, YXErrorDomain.receipt)
+                    XCTAssertEqual(error?.type, YXErrorType.receiptMissing)
+                    exp.fulfill()
+                }
+            }
+        }
+        waitForExpectations(timeout: 0.25, handler: nil)
+    }
+    
+    func testWrongReceipt() {
+        let exp = expectation(description: "Wrong receipt will be handled")
+        
+        let validator = FakeYXReceiptValidator(expectedData: Data())
+        let refresher = YXReceiptRefresherImpl(requestBuilder: FakeYXReceiptRefreshRequestBuilder(mode: .normal,
+                                                                                                  receipt: Data(),
+                                                                                                  url: receiptUrl))
+        receiptManager = YXReceiptManagerImpl(receiptValidator: validator,
+                                              receiptRefresher: refresher,
+                                              receiptUrl: receiptUrl)
+        
+        let trasnactionManager = YXTransactionManagerImpl(paymentQueue: FakeSKPaymentQueue(transactions: []),
+                                                          receiptManager: receiptManager,
+                                                          userManager: userManager)
+        let storeKit = YXStoreKit(user: userManager,
+                                  product: productService,
+                                  receipt: receiptManager,
+                                  transaction: trasnactionManager)
+        let product = FakeSKProduct(productId: "com.test.valid1")
+        let newUser = YXUser(identifier: user,
+                             pendingTransactions: [],
+                             existingSubscriptions: [],
+                             productIdentifiers:productIdentifiers)
+        userManager.update(user: newUser, callbackQueue: .main) { (error) in
+            XCTAssertNil(error)
+            storeKit.start(callbackQueue: .main) { (errors) in
+                XCTAssertTrue(errors.isEmpty)
+                storeKit.purchase(product: product,
+                                  discount: nil,
+                                  quantity: 1,
+                                  callbackQueue: .main) { (error) in
+                    XCTAssertNotNil(error)
+                    XCTAssertEqual(error?.domain, YXErrorDomain.receipt)                    
+                    exp.fulfill()
+                }
             }
         }
         waitForExpectations(timeout: 0.25, handler: nil)

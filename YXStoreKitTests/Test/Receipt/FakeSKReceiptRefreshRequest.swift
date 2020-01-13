@@ -39,7 +39,6 @@ class FakeSKReceiptRefreshRequest: SKReceiptRefreshRequest {
         switch mode {
         case .normal:
             if let data = receipt, let url = url {
-                print(url)
                 try? data.write(to: url, options: .atomic)
             }
             delegate?.requestDidFinish?(self)
